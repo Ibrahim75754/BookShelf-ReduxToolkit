@@ -24,6 +24,12 @@ const bookSlice = createSlice({
     removeFromReadingList: (state, { payload }) => {
       state.readingList = state.readingList.filter(book => book.id !== payload)
     },
+    addToFinishedList: (state, { payload }) => {
+      // const newState = { ...state, readingList: state.readingList.filter((book) => book.id !== payload.id), finishedList: [...state.finishedList, payload] }
+      // return newState;
+      state.readingList = state.readingList.filter((book) => book.id !== payload.id);
+      state.finishedList.push(payload)
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
@@ -37,6 +43,6 @@ const bookSlice = createSlice({
 })
 
 
-export const { addToReadingList, removeFromReadingList, incrementByAmount } = bookSlice.actions
+export const { addToReadingList, removeFromReadingList, addToFinishedList } = bookSlice.actions
 
 export default bookSlice.reducer
